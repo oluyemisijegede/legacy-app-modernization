@@ -1,0 +1,151 @@
+body {
+
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#4facfe,#00f2fe);
+padding:40px;
+color:#333;
+
+}
+
+h1{
+text-align:center;
+color:white;
+margin-bottom:40px;
+}
+
+h2{
+color:white;
+}
+
+/* PRODUCT GRID */
+
+#products{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+}
+
+/* PRODUCT CARD */
+
+.product{
+
+padding:20px;
+border-radius:10px;
+width:220px;
+color:white;
+box-shadow:0px 6px 10px rgba(0,0,0,0.2);
+transition:transform 0.2s;
+
+}
+
+.product:hover{
+transform:scale(1.05);
+}
+
+/* DIFFERENT PRODUCT COLORS */
+
+.product:nth-child(1){
+background:#ff7a18;
+}
+
+.product:nth-child(2){
+background:#43cea2;
+}
+
+.product:nth-child(3){
+background:#ff4b2b;
+}
+
+.product:nth-child(4){
+background:#6a11cb;
+}
+
+/* BUTTON STYLE */
+
+button{
+
+background:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+button:hover{
+
+background:black;
+color:white;
+
+}
+
+/* CART */
+
+#cart{
+
+margin-top:20px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 6px 10px rgba(0,0,0,0.2);
+
+}
+
+/* CART ITEMS WITH COLORS */
+
+.cart-item{
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+color:white;
+}
+
+.cart-item:nth-child(1){
+background:#ff7a18;
+}
+
+.cart-item:nth-child(2){
+background:#43cea2;
+}
+
+.cart-item:nth-child(3){
+background:#ff4b2b;
+}
+
+.cart-item:nth-child(4){
+background:#6a11cb;
+}
+
+.thankyou-container{
+
+background:white;
+padding:50px;
+border-radius:10px;
+text-align:center;
+max-width:500px;
+margin:auto;
+margin-top:100px;
+box-shadow:0px 8px 20px rgba(0,0,0,0.3);
+
+}
+
+.thankyou-container h1{
+color:#28a745;
+}
+
+.thankyou-container a{
+
+display:inline-block;
+margin-top:20px;
+background:#007BFF;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:6px;
+
+}
+
+.thankyou-container a:hover{
+background:#0056b3;
+}

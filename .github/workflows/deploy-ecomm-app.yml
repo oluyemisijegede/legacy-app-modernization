@@ -1,0 +1,70 @@
+name: CI/CD Pipeline  ecommerce-app
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+         #Install dependencies
+      - name: Install Dependencies
+        working-directory: app
+        run: npm install
+
+
+      # Build Docker Image
+      - name: Build Docker Image
+        run: docker build -f docker/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/ecommerce-app:latest .
+
+      # Push to DockerHub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce-app:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Configure AWS CLI
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1           #CHANGE TO YOUR REGION
+
+      # Update kubeconfig for EKS
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --region us-east-1 --name migration-eks-cluster
+
+      # Deploy to EKS
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f kubernetes/namespace.yaml
+          kubectl apply -f kubernetes/deployment.yaml -f kubernetes/service.yaml -f kubernetes/servicemonitor.yaml
+          
+        
