@@ -1,4 +1,4 @@
-name: CI/CD Pipeline  ecommerce-app
+name: CI/CD Pipeline  ecommerce-app for deployment on AWS EKS
 
 on:
   push:
