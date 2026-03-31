@@ -2,7 +2,7 @@
 
 A modernized e-commerce shopping cart application built with Node.js and Express, containerized with Docker, deployed to AWS EKS with Kubernetes, and monitored with Prometheus.
 
-## What Gets Created
+## What Gets Created Yemi
 
 - **E-Commerce App** — A shopping cart web application with product listing, add-to-cart, and checkout functionality
 - **Prometheus Metrics** — Built-in metrics endpoint (`/metrics`) tracking HTTP request counts and Node.js runtime metrics
